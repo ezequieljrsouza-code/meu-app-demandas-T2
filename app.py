@@ -184,4 +184,4 @@ function copiarTexto() {{
     COPIAR PARA WHATSAPP 📲
 </button>
 """
-components.html(js_code, height=80)
+components.html(js_code, height=200)
