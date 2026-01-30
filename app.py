@@ -125,13 +125,13 @@ with tab3:
     txt_presenca = f"""*RESUMO DE PRESENÇA*\n✅ Log: {f.get('p1',50)} | ✅ Diaristas: {f.get('p3',12)}/{f.get('p2',12)}\n📄 Atestados: {f.get('p4',1)} | ❌ Faltas: {f.get('p5',8)}\n🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8)):02d}"""
 
     st.divider()
-    st.text_area("Cópia Parcial Presença", txt_presenca, height=150)
+    st.text_area("Cópia Parcial Presença", txt_presenca, height=300)
 
 # --- RESUMO TOTAL E BOTÃO FINAL ---
 st.markdown("---")
 st.subheader("🚀 Relatório Completo")
 txt_completo = f"{txt_layout}\n\n{txt_operacional}\n\n{txt_presenca}"
-st.text_area("Texto final:", txt_completo, height=250)
+st.text_area("Texto final:", txt_completo, height=400)
 
 # JS Corrigido para lidar com quebras de linha
 txt_js = txt_completo.replace("\n", "\\n")
@@ -148,4 +148,4 @@ function cp(){{
     COPIAR TUDO PARA WHATSAPP 📲
 </button>
 """
-components.html(js_code, height=100)
+components.html(js_code, height=800)
