@@ -3,7 +3,16 @@ import streamlit.components.v1 as components
 from datetime import datetime
 
 # Configuração da Página
-st.set_page_config(page_title="Report Operacional SPA1", page_icon="📦", layout="wide")
+st.set_page_config(
+    page_title="Report Operacional SPA1",
+    page_icon="📦",
+    layout="wide",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
+)
 
 # --- 1. ESTILIZAÇÃO CSS (Esconder Menus) ---
 st.markdown("""
