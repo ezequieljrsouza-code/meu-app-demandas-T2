@@ -6,7 +6,16 @@ from google.oauth2 import service_account
 import json
 
 # 1. Configuração da Página
-st.set_page_config(page_title="Report Operacional SPA1", page_icon="📦", layout="wide")
+st.set_page_config(
+    page_title="Report Operacional SPA1",
+    page_icon="📦",
+    layout="wide",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
+)
 
 # 2. Conexão Firestore
 @st.cache_resource
