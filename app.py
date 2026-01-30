@@ -85,7 +85,7 @@ with tab3:
     for i, (l, k, d) in enumerate(p_campos):
         [c1, c2, c3][i%3].number_input(l, key=f"in_{k}", value=int(st.session_state.form_data.get(k, d)), on_change=update, args=(k,))
 
-# 6. Texto Final
+# 6. Texto Final e Visualização
 f = st.session_state.form_data
 txt = f"""Status Layout 
 🔴 Não iniciado | 🟡 Em andamento | 🟢 finalizado 
@@ -114,5 +114,24 @@ REPORT OPERACIONAL
 """
 
 st.divider()
-js = f"<script>function cp(){{navigator.clipboard.writeText(`{txt}`);alert('Copiado!');}}</script><button style='width:100%;background:#25D366;color:white;border:none;padding:15px;border-radius:10px;font-weight:bold;cursor:pointer;' onclick='cp()'>COPIAR WHATSAPP 📲</button>"
+st.subheader("📄 Resumo para Conferência")
+# Reintroduzindo a caixa de texto para visualização e cópia manual
+st.text_area("Texto gerado:", value=txt, height=350)
+
+# Botão de Cópia Automática via JavaScript
+js = f"""
+<script>
+function cp(){{
+    const text = `{txt}`;
+    navigator.clipboard.writeText(text).then(() => {{
+        alert('Copiado com sucesso! ✅');
+    }}).catch(err => {{
+        alert('Erro ao copiar. Use a caixa de texto acima.');
+    }});
+}}
+</script>
+<button style='width:100%; background:#25D366; color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer;' onclick='cp()'>
+    COPIAR PARA WHATSAPP 📲
+</button>
+"""
 components.html(js, height=80)
