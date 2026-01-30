@@ -6,6 +6,7 @@ from google.oauth2 import service_account
 import json
 
 # 1. Configuração da Página
+st.write(f"Autor: **Ezequiel Miranda**")
 st.set_page_config(
     page_title="Report Operacional SPA1",
     page_icon="📦",
@@ -16,7 +17,7 @@ st.set_page_config(
         'About': None
     }
 )
-st.write(f"Autor: **Ezequiel Miranda**")
+
 
 # 2. Conexão Firestore
 @st.cache_resource
