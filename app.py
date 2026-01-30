@@ -111,7 +111,7 @@ st.markdown("---")
 texto_final = f"""Status Layout 
 🔴 Não iniciado
 🟡 Em andamento 
-🟢 finalizado 
+🟢 Finalizado 
 
 "{data_hoje}" - SPA1 - T2 - Demandas
 
@@ -131,7 +131,7 @@ Volumoso SVC
 {vsvc_s_org} Organização das ruas
 {vsvc_s_qr} Etiquetas de Qrs
 
-Goleiro-
+Goleiro
 {gol_s_org}  Organização das ruas
 {gol_s_qr} Etiquetas de Qrs
 
