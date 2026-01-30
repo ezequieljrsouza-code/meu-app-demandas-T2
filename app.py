@@ -23,6 +23,7 @@ st.markdown('<div style="text-align: right; color: grey; font-weight: bold;">Eze
 
 # Título
 st.title("📦 Report Operacional - SPA1 T2")
+st.write(f"Autor: **Ezequiel Miranda**")
 
 # --- DADOS AUTOMÁTICOS ---
 data_hoje = datetime.now().strftime("%d/%m/%Y")
