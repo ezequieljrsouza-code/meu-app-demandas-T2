@@ -30,17 +30,15 @@ data_hoje = datetime.now().strftime("%d/%m/%Y")
 # --- OPÇÕES DE STATUS ---
 status_opts = ["🔴", "🟡", "🟢"]
 
-# --- FUNÇÃO AJUDANTE PARA LAYOUT ---
+# --- FUNÇÃO AJUDANTE PARA LAYOUT (SEM PORCENTAGEM) ---
 def area_section(titulo, key_prefix):
     st.markdown(f"**{titulo}**")
     c1, c2 = st.columns(2)
     with c1:
         s_org = st.selectbox("Org. Ruas", status_opts, key=f"{key_prefix}_org_status", index=1)
-        p_org = st.number_input("%", 0, 100, 100, key=f"{key_prefix}_org_pct")
     with c2:
         s_qr = st.selectbox("Etiq. QRs", status_opts, key=f"{key_prefix}_qr_status", index=1)
-        p_qr = st.number_input("% ", 0, 100, 100, key=f"{key_prefix}_qr_pct")
-    return s_org, p_org, s_qr, p_qr
+    return s_org, s_qr
 
 # ==========================================
 # FORMULÁRIO
@@ -51,15 +49,15 @@ tab1, tab2, tab3 = st.tabs(["🏭 Layout", "👷 Operacional", "📝 Presença"]
 
 with tab1:
     st.markdown("### Status Layout / Áreas")
-    gxpt_vals = area_section("Gaiolas XPT", "gxpt")
+    gxpt_s_org, gxpt_s_qr = area_section("Gaiolas XPT", "gxpt")
     st.divider()
-    vxpt_vals = area_section("Volumoso XPT", "vxpt")
+    vxpt_s_org, vxpt_s_qr = area_section("Volumoso XPT", "vxpt")
     st.divider()
-    gsvc_vals = area_section("Gaiolas SVC", "gsvc")
+    gsvc_s_org, gsvc_s_qr = area_section("Gaiolas SVC", "gsvc")
     st.divider()
-    vsvc_vals = area_section("Volumoso SVC", "vsvc")
+    vsvc_s_org, vsvc_s_qr = area_section("Volumoso SVC", "vsvc")
     st.divider()
-    gol_vals = area_section("Goleiro", "gol")
+    gol_s_org, gol_s_qr = area_section("Goleiro", "gol")
 
 with tab2:
     st.markdown("### Report Operacional - PSs")
@@ -118,24 +116,24 @@ texto_final = f"""Status Layout
 "{data_hoje}" - SPA1 - T2 - Demandas
 
 Gaiolas XPT
-{gxpt_vals[0]} Organização das ruas {gxpt_vals[1]}%
-{gxpt_vals[2]} Etiquetas de Qrs {gxpt_vals[3]}%
+{gxpt_s_org} Organização das ruas
+{gxpt_s_qr} Etiquetas de Qrs
 
 Volumoso XPT 
-{vxpt_vals[0]} Organização das ruas {vxpt_vals[1]}%
-{vxpt_vals[2]} Etiquetas de Qrs {vxpt_vals[3]}%
+{vxpt_s_org} Organização das ruas
+{vxpt_s_qr} Etiquetas de Qrs
 
 Gaiolas SVC 
-{gsvc_vals[0]} Organização das ruas {gsvc_vals[1]}%
-{gsvc_vals[2]} Etiquetas de Qrs {gsvc_vals[3]}%
+{gsvc_s_org} Organização das ruas
+{gsvc_s_qr} Etiquetas de Qrs
 
 Volumoso SVC 
-{vsvc_vals[0]} Organização das ruas {vsvc_vals[1]}%
-{vsvc_vals[2]} Etiquetas de Qrs {vsvc_vals[3]}%
+{vsvc_s_org} Organização das ruas
+{vsvc_s_qr} Etiquetas de Qrs
 
 Goleiro-
-{gol_vals[0]}  Organização das ruas {gol_vals[1]}%
-{gol_vals[2]} Etiquetas de Qrs {gol_vals[3]}%
+{gol_s_org}  Organização das ruas
+{gol_s_qr} Etiquetas de Qrs
 
 REPORT OPERACIONAL - PSs
 Legenda: 🟢 Finalizado | 🟡 Em andamento | 🔴 Pendente
@@ -163,7 +161,7 @@ Responsáveis por categoria hoje:
 """
 
 # Exibição do texto gerado
-st.text_area("Pré-visualização", texto_final, height=300)
+st.text_area("Pré-visualização (Copie usando o botão verde abaixo)", texto_final, height=300)
 
 # --- JAVASCRIPT PARA COPIAR ---
 # Tratamento para quebras de linha no JavaScript
@@ -174,7 +172,7 @@ js_code = f"""
 function copiarTexto() {{
     const textToCopy = `{texto_final}`;
     navigator.clipboard.writeText(textToCopy).then(() => {{
-        // Opcional: Feedback visual simples se quiser, mas o botão já basta
+        // Feedback visual simples pode ser adicionado aqui
     }});
 }}
 </script>
@@ -184,4 +182,4 @@ function copiarTexto() {{
     COPIAR PARA WHATSAPP 📲
 </button>
 """
-components.html(js_code, height=200)
+components.html(js_code, height=80)
