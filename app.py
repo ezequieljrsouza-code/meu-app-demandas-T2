@@ -16,6 +16,7 @@ st.set_page_config(
         'About': None
     }
 )
+st.write(f"Autor: **Ezequiel Miranda**")
 
 # 2. Conexão Firestore
 @st.cache_resource
