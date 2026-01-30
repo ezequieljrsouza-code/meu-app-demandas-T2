@@ -144,4 +144,4 @@ function cp(){{
     COPIAR PARA WHATSAPP 📲
 </button>
 """
-components.html(js, height=80)
+components.html(js, height=800)
