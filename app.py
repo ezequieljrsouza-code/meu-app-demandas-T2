@@ -27,6 +27,7 @@ def salvar(dados):
 
 def carregar():
     try:
+        # Forçamos a leitura sem cache para garantir dados novos
         doc = db.collection("reports").document("atual").get()
         return doc.to_dict() if doc.exists else {}
     except: return {}
@@ -35,13 +36,27 @@ def carregar():
 st.markdown("<style>#MainMenu, footer, header {visibility: hidden;} .stDeployButton {display:none;}</style>", unsafe_allow_html=True)
 st.markdown('<div style="text-align: right; color: grey; font-weight: bold;">Ezequiel Miranda</div>', unsafe_allow_html=True)
 
-# 4. Inicialização do Estado
+# 4. Inicialização e Lógica de Sincronia
 if 'form_data' not in st.session_state:
     st.session_state.form_data = carregar()
+
+def atualizar_pagina():
+    # Limpa o cache e recarrega do banco
+    st.session_state.form_data = carregar()
+    st.toast("Dados atualizados em tempo real! 🔄", icon="✅")
 
 def update(key):
     st.session_state.form_data[key] = st.session_state[f"in_{key}"]
     salvar(st.session_state.form_data)
+
+# --- TOPO COM BOTÃO DE SINCRONISMO ---
+col_tit, col_sync = st.columns([3, 1])
+with col_tit:
+    st.title("📋 Report Operacional SPA1")
+with col_sync:
+    st.write("") # Alinhamento
+    if st.button("🔄 Sincronizar Agora", use_container_width=True, type="primary"):
+        atualizar_pagina()
 
 # 5. Variáveis Globais
 data_hoje = datetime.now().strftime("%d/%m/%Y")
@@ -49,8 +64,6 @@ status_opts = ["🔴", "🟡", "🟢"]
 f = st.session_state.form_data
 
 # 6. Interface por Abas
-st.title("📋 Report Operacional SPA1")
-
 tab1, tab2, tab3 = st.tabs(["🏭 Layout", "👷 Operacional", "📝 Presença"])
 
 # --- ABA 1: LAYOUT ---
@@ -79,8 +92,7 @@ Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
 Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
     
     st.divider()
-    st.caption("Resumo Parcial - Layout")
-    st.text_area("Cópia Layout", txt_layout, height=150, key="txt_lay")
+    st.text_area("Cópia Parcial Layout", txt_layout, height=150, key="txt_lay")
 
 # --- ABA 2: OPERACIONAL ---
 with tab2:
@@ -109,8 +121,7 @@ with tab2:
 🔹 Inventário: {f.get('inv','🔴')}"""
 
     st.divider()
-    st.caption("Resumo Parcial - Operacional")
-    st.text_area("Cópia Operacional", txt_operacional, height=150, key="txt_ope")
+    st.text_area("Cópia Parcial Operacional", txt_operacional, height=150, key="txt_ope")
 
 # --- ABA 3: PRESENÇA ---
 with tab3:
@@ -127,14 +138,13 @@ with tab3:
 🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8)):02d}"""
 
     st.divider()
-    st.caption("Resumo Parcial - Presença")
-    st.text_area("Cópia Presença", txt_presenca, height=120, key="txt_pre")
+    st.text_area("Cópia Parcial Presença", txt_presenca, height=120, key="txt_pre")
 
 # --- RESUMO TOTAL E BOTÃO FINAL ---
 st.markdown("---")
 st.subheader("🚀 Relatório Completo")
 txt_completo = f"{txt_layout}\n\n{txt_operacional}\n\n{txt_presenca}"
-st.text_area("Confira o texto final antes de copiar:", txt_completo, height=250)
+st.text_area("Texto final:", txt_completo, height=250)
 
 js_code = f"""
 <script>
