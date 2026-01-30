@@ -6,18 +6,8 @@ from google.oauth2 import service_account
 import json
 
 # 1. Configuração da Página
+st.set_page_config(page_title="Report Operacional SPA1", page_icon="📋", layout="wide")
 st.write(f"Autor: **Ezequiel Miranda**")
-st.set_page_config(
-    page_title="Report Operacional SPA1",
-    page_icon="📦",
-    layout="wide",
-    menu_items={
-        'Get Help': None,
-        'Report a bug': None,
-        'About': None
-    }
-)
-
 
 # 2. Conexão Firestore
 @st.cache_resource
@@ -53,19 +43,23 @@ def update(key):
     st.session_state.form_data[key] = st.session_state[f"in_{key}"]
     salvar(st.session_state.form_data)
 
-# 5. Interface
-st.title("📋 Report Operacional SPA1")
+# 5. Variáveis Globais
 data_hoje = datetime.now().strftime("%d/%m/%Y")
 status_opts = ["🔴", "🟡", "🟢"]
+f = st.session_state.form_data
+
+# 6. Interface por Abas
+st.title("📋 Report Operacional SPA1")
 
 tab1, tab2, tab3 = st.tabs(["🏭 Layout", "👷 Operacional", "📝 Presença"])
 
+# --- ABA 1: LAYOUT ---
 with tab1:
     def area(label, k):
         st.markdown(f"**{label}**")
         c1, c2 = st.columns(2)
-        c1.selectbox("Org. Ruas", status_opts, key=f"in_{k}_o", index=status_opts.index(st.session_state.form_data.get(f"{k}_o", "🟡")), on_change=update, args=(f"{k}_o",))
-        c2.selectbox("Etiq. QRs", status_opts, key=f"in_{k}_q", index=status_opts.index(st.session_state.form_data.get(f"{k}_q", "🟡")), on_change=update, args=(f"{k}_q",))
+        c1.selectbox("Org. Ruas", status_opts, key=f"in_{k}_o", index=status_opts.index(f.get(f"{k}_o", "🟡")), on_change=update, args=(f"{k}_o",))
+        c2.selectbox("Etiq. QRs", status_opts, key=f"in_{k}_q", index=status_opts.index(f.get(f"{k}_q", "🟡")), on_change=update, args=(f"{k}_q",))
 
     area("Gaiolas XPT", "gx")
     area("Volumoso XPT", "vx")
@@ -73,32 +67,7 @@ with tab1:
     area("Volumoso SVC", "vs")
     area("Goleiro", "go")
 
-with tab2:
-    def resp(label, k, d_n, col):
-        with col:
-            st.text_input(label, key=f"in_{k}_n", value=st.session_state.form_data.get(f"{k}_n", d_n), on_change=update, args=(f"{k}_n",))
-            st.selectbox(f"Status {label}", status_opts, key=f"in_{k}_s", index=status_opts.index(st.session_state.form_data.get(f"{k}_s", "🟡")), on_change=update, args=(f"{k}_s",))
-
-    c1, c2 = st.columns(2)
-    resp("Devolução XPT", "d", "Luis Felipe", c1)
-    resp("Avarias", "a", "Ney", c1)
-    resp("Retorno Estação", "r", "Ney / Rauan", c1)
-    resp("Sem Identificação", "s", "Dharlyson", c2)
-    resp("Backlog Volumoso", "b", "Ney", c2)
-    resp("Recebimento", "p", "Oliverrah / Robert", c2)
-    c2.selectbox("Inventário", status_opts, key="in_inv", index=status_opts.index(st.session_state.form_data.get("inv", "🔴")), on_change=update, args=("inv",))
-
-with tab3:
-    c1, c2, c3 = st.columns(3)
-    p_campos = [("Presentes", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
-                ("Atestados", "p4", 1), ("Faltas", "p5", 8), ("Pulmão", "p6", 1),
-                ("Folgas", "p7", 8), ("Suspensões", "p8", 0)]
-    for i, (l, k, d) in enumerate(p_campos):
-        [c1, c2, c3][i%3].number_input(l, key=f"in_{k}", value=int(st.session_state.form_data.get(k, d)), on_change=update, args=(k,))
-
-# 6. Texto Final e Visualização
-f = st.session_state.form_data
-txt = f"""Status Layout 
+    txt_layout = f"""Status Layout 
 🔴 Não iniciado | 🟡 Em andamento | 🟢 finalizado 
 
 "{data_hoje}" - SPA1 - T2 - Demandas
@@ -107,42 +76,77 @@ Gaiolas XPT: {f.get('gx_o','🟡')} Org. Ruas | {f.get('gx_q','🟡')} QRs
 Volumoso XPT: {f.get('vx_o','🟡')} Org. Ruas | {f.get('vx_q','🟡')} QRs
 Gaiolas SVC: {f.get('gs_o','🟡')} Org. Ruas | {f.get('gs_q','🟡')} QRs
 Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
-Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs
+Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
+    
+    st.divider()
+    st.caption("Resumo Parcial - Layout")
+    st.text_area("Cópia Layout", txt_layout, height=150, key="txt_lay")
 
-REPORT OPERACIONAL
+# --- ABA 2: OPERACIONAL ---
+with tab2:
+    def resp(label, k, d_n, col):
+        with col:
+            st.text_input(label, key=f"in_{k}_n", value=f.get(f"{k}_n", d_n), on_change=update, args=(f"{k}_n",))
+            st.selectbox(f"Status {label}", status_opts, key=f"in_{k}_s", index=status_opts.index(f.get(f"{k}_s", "🟡")), on_change=update, args=(f"{k}_s",))
+
+    c1, c2 = st.columns(2)
+    resp("Devolução XPT", "d", "Luis Felipe", c1)
+    resp("Avarias", "a", "Ney", c1)
+    resp("Retorno Estação", "r", "Ney / Rauan", c1)
+    resp("Sem Identificação", "s", "Dharlyson", c2)
+    resp("Backlog Volumoso", "b", "Ney", c2)
+    resp("Recebimento", "p", "Oliverrah / Robert", c2)
+    c2.selectbox("Inventário", status_opts, key="in_inv", index=status_opts.index(f.get("inv", "🔴")), on_change=update, args=("inv",))
+
+    txt_operacional = f"""REPORT OPERACIONAL
+📅 Data: {data_hoje}
 🔹 Devolução: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
 🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
 🔹 Retorno: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
 🔹 Sem ID: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
 🔹 Backlog: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
-🔹 Inventário: {f.get('inv','🔴')}
+🔹 Inventário: {f.get('inv','🔴')}"""
 
-*PRESENÇA*
+    st.divider()
+    st.caption("Resumo Parcial - Operacional")
+    st.text_area("Cópia Operacional", txt_operacional, height=150, key="txt_ope")
+
+# --- ABA 3: PRESENÇA ---
+with tab3:
+    c1, c2, c3 = st.columns(3)
+    p_campos = [("Presentes", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
+                ("Atestados", "p4", 1), ("Faltas", "p5", 8), ("Pulmão", "p6", 1),
+                ("Folgas", "p7", 8), ("Suspensões", "p8", 0)]
+    for i, (l, k, d) in enumerate(p_campos):
+        [c1, c2, c3][i%3].number_input(l, key=f"in_{k}", value=int(f.get(k, d)), on_change=update, args=(k,))
+
+    txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ Log: {f.get('p1',50)} | ✅ Diaristas: {f.get('p3',12)}/{f.get('p2',12)}
 📄 Atestados: {f.get('p4',1)} | ❌ Faltas: {f.get('p5',8)}
-🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8)):02d}
-"""
+🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8)):02d}"""
 
-st.divider()
-st.subheader("📄 Resumo para Conferência")
-# Reintroduzindo a caixa de texto para visualização e cópia manual
-st.text_area("Texto gerado:", value=txt, height=350)
+    st.divider()
+    st.caption("Resumo Parcial - Presença")
+    st.text_area("Cópia Presença", txt_presenca, height=120, key="txt_pre")
 
-# Botão de Cópia Automática via JavaScript
-js = f"""
+# --- RESUMO TOTAL E BOTÃO FINAL ---
+st.markdown("---")
+st.subheader("🚀 Relatório Completo")
+txt_completo = f"{txt_layout}\n\n{txt_operacional}\n\n{txt_presenca}"
+st.text_area("Confira o texto final antes de copiar:", txt_completo, height=250)
+
+js_code = f"""
 <script>
 function cp(){{
-    const text = `{txt}`;
+    const text = `{txt_completo}`;
     navigator.clipboard.writeText(text).then(() => {{
-        alert('Copiado com sucesso! ✅');
-    }}).catch(err => {{
-        alert('Erro ao copiar. Use a caixa de texto acima.');
+        alert('Relatório completo copiado! ✅');
     }});
 }}
 </script>
-<button style='width:100%; background:#25D366; color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer;' onclick='cp()'>
-    COPIAR PARA WHATSAPP 📲
+<button style='width:100%; background:#25D366; color:white; border:none; padding:18px; border-radius:10px; font-weight:bold; font-size:18px; cursor:pointer;' onclick='cp()'>
+    COPIAR TUDO PARA WHATSAPP 📲
 </button>
 """
-components.html(js, height=800)
+components.html(js_code, height=100)
