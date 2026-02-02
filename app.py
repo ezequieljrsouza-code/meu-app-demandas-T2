@@ -8,6 +8,11 @@ import json
 # 1. Configuração da Página
 st.set_page_config(page_title="Report Operacional SPA1", page_icon="📋", layout="wide")
 
+# --- 1. NOTIFICAÇÃO PÓS-SYNC (Inserido aqui) ---
+if st.session_state.get('sync_ok'):
+    st.toast("Sincronizado com a nuvem com sucesso! ☁️✅", icon="🔄")
+    st.session_state['sync_ok'] = False
+
 # 2. Conexão Firestore
 @st.cache_resource
 def get_db():
@@ -51,10 +56,10 @@ with col_t:
     st.write(f"Analista: **Ezequiel Miranda**")
 with col_s:
     st.write("##")
-    # Botão Sincronizar: Recarrega do banco e reinicia a página para atualizar textos
+    # Botão Sincronizar: Ajustado para ativar a notificação pós-reload
     if st.button("🔄 Sincronizar", use_container_width=True, type="primary"):
         st.session_state.form_data = carregar()
-        st.toast("Dados atualizados com sucesso!", icon="✅")
+        st.session_state['sync_ok'] = True # Ativa o gatilho da notificação
         st.rerun()
 
 # 5. Variáveis Globais
@@ -62,7 +67,7 @@ data_hoje = datetime.now().strftime("%d/%m/%Y")
 status_opts = ["🔴", "🟡", "🟢"]
 f = st.session_state.form_data # Atalho para facilitar leitura
 
-tab1, tab2, tab3 = st.tabs(["🏭 Layout", "👷 Operacional", "📝 Presença"])
+tab1, tab2, tab3 = st.tabs(["🏭 Layout", "👷 Operacional ", "📝 Presença"])
 
 # --- ABA 1: LAYOUT ---
 with tab1:
@@ -140,7 +145,6 @@ txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
 🔹 Inventário: {f.get('inv','🔴')}"""
 
-# CORREÇÃO AQUI: Adicionado o campo Suspensões (p8)
 txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ PSs Presentes: {f.get('pss_p', 0)}
 ✅ PSs de Folga: {f.get('pss_f', 0)}
