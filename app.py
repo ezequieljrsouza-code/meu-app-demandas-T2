@@ -124,15 +124,13 @@ with tab3:
 txt_layout = f"""Status Layout 
 🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
 
-"{data_hoje}" - SPA1 - T2 - Demandas
-
 Gaiolas XPT: {f.get('gx_o','🟡')} Org. Ruas | {f.get('gx_q','🟡')} QRs
 Volumoso XPT: {f.get('vx_o','🟡')} Org. Ruas | {f.get('vx_q','🟡')} QRs
 Gaiolas SVC: {f.get('gs_o','🟡')} Org. Ruas | {f.get('gs_q','🟡')} QRs
 Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
 Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 
-txt_operacional = f"""REPORT OPERACIONAL DE PSs
+txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 📅 Data: {data_hoje}
 🔹 Devolução: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
 🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
