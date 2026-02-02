@@ -147,7 +147,7 @@ txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ PSs de Folga: {f.get('pss_f', 0)}
 ✅ Log: {f.get('p1',50)} | ✅ Diaristas: {f.get('p3',12)}/{f.get('p2',12)}
 📄 Atestados: {f.get('p4',1)} | ❌ Faltas: {f.get('p5',8)}
-🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8)):02d}
+🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8))}
 ⚠ Suspensões: {f.get('p8',0)}"""
 
 txt_completo = f"{txt_layout}\n\n{txt_operacional}\n\n{txt_presenca}"
