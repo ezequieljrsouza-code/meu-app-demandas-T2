@@ -138,7 +138,7 @@ txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 🔹 Sem ID: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
 🔹 Backlog: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
-🔹 Inventário: {f.get('p_n','Oliverrah')} {f.get('inv','🔴')}"""
+🔹 Inventário: {f.get('inv','🔴')}"""
 
 # CORREÇÃO AQUI: Adicionado o campo Suspensões (p8)
 txt_presenca = f"""*RESUMO DE PRESENÇA*
