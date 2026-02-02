@@ -113,7 +113,7 @@ with tab3:
     st.markdown("---")
     st.markdown("### Dados Gerais")
     c1, c2, c3 = st.columns(3)
-    p_campos = [("Presentes (Log/PT)", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
+    p_campos = [("Presentes (Log)", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
                 ("Atestados", "p4", 1), ("Faltas", "p5", 8), ("Pulmão", "p6", 1),
                 ("Folgas", "p7", 8), ("Suspensões", "p8", 0)]
     for i, (l, k, d) in enumerate(p_campos):
