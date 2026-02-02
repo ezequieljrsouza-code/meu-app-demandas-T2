@@ -113,14 +113,13 @@ with tab3:
     st.markdown("---")
     st.markdown("### Dados Gerais")
     c1, c2, c3 = st.columns(3)
-    p_campos = [("Presentes (Log)", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
+    p_campos = [("Presentes (Log/PT)", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
                 ("Atestados", "p4", 1), ("Faltas", "p5", 8), ("Pulmão", "p6", 1),
                 ("Folgas", "p7", 8), ("Suspensões", "p8", 0)]
     for i, (l, k, d) in enumerate(p_campos):
         [c1, c2, c3][i%3].number_input(l, key=f"in_{k}", value=int(f.get(k, d)), on_change=update, args=(k,))
 
 # --- GERAÇÃO DE TEXTO E CÓPIA ---
-# Montagem das strings usando o dicionário 'f' que já está atualizado
 txt_layout = f"""Status Layout 
 🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
 
@@ -142,19 +141,20 @@ txt_operacional = f"""REPORT OPERACIONAL DE PSs
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
 🔹 Inventário: {f.get('inv','🔴')}"""
 
+# CORREÇÃO AQUI: Adicionado o campo Suspensões (p8)
 txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ PSs Presentes: {f.get('pss_p', 0)}
 ✅ PSs de Folga: {f.get('pss_f', 0)}
-
 ✅ Log: {f.get('p1',50)} | ✅ Diaristas: {f.get('p3',12)}/{f.get('p2',12)}
 📄 Atestados: {f.get('p4',1)} | ❌ Faltas: {f.get('p5',8)}
-🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8)):02d}"""
+🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8)):02d}
+⚠ Suspensões: {f.get('p8',0)}"""
 
 txt_completo = f"{txt_layout}\n\n{txt_operacional}\n\n{txt_presenca}"
 
 st.divider()
 st.subheader("🚀 Relatório Final")
-st.text_area("Confira o texto:", txt_completo, height=600)
+st.text_area("Confira o texto:", txt_completo, height=450)
 
 # Tratamento para JavaScript
 txt_js = txt_completo.replace("\n", "\\n").replace("'", "\\'")
