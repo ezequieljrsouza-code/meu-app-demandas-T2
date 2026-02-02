@@ -113,7 +113,7 @@ with tab3:
     st.markdown("---")
     st.markdown("### Dados Gerais")
     c1, c2, c3 = st.columns(3)
-    p_campos = [("Presentes (Log/PT)", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
+    p_campos = [("Presentes (Log)", "p1", 50), ("Diaristas Sol.", "p2", 12), ("Diaristas Pres.", "p3", 12),
                 ("Atestados", "p4", 1), ("Faltas", "p5", 8), ("Pulmão", "p6", 1),
                 ("Folgas", "p7", 8), ("Suspensões", "p8", 0)]
     for i, (l, k, d) in enumerate(p_campos):
@@ -154,7 +154,7 @@ txt_completo = f"{txt_layout}\n\n{txt_operacional}\n\n{txt_presenca}"
 
 st.divider()
 st.subheader("🚀 Relatório Final")
-st.text_area("Confira o texto:", txt_completo, height=450)
+st.text_area("Confira o texto:", txt_completo, height=700)
 
 # Tratamento para JavaScript
 txt_js = txt_completo.replace("\n", "\\n").replace("'", "\\'")
