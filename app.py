@@ -48,7 +48,7 @@ def update(key):
 col_t, col_s = st.columns([3, 1])
 with col_t:
     st.title("📋 Report Operacional SPA1")
-    st.write(f"Autor: **Ezequiel Miranda**")
+    st.write(f"Analista: **Ezequiel Miranda**")
 with col_s:
     st.write("##")
     # Botão Sincronizar: Recarrega do banco e reinicia a página para atualizar textos
