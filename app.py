@@ -154,7 +154,7 @@ txt_completo = f"{txt_layout}\n\n{txt_operacional}\n\n{txt_presenca}"
 
 st.divider()
 st.subheader("🚀 Relatório Final")
-st.text_area("Confira o texto:", txt_completo, height=450)
+st.text_area("Confira o texto:", txt_completo, height=600)
 
 # Tratamento para JavaScript
 txt_js = txt_completo.replace("\n", "\\n").replace("'", "\\'")
