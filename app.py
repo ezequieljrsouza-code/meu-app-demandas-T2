@@ -102,7 +102,6 @@ with tab2:
     resp_row("Backlog Volumoso", "b", "Ney")
     resp_row("Retorno Estação", "r", "Ney / Rauan")
     resp_row("Recebimento", "p", "Oliverrah / Robert")
-    resp_row("Inventário", "p", "Oliverrah / Robert")
     
     c_inv_l, c_inv_s = st.columns([3, 1])
     with c_inv_l: st.write("**Inventário**")
@@ -144,7 +143,7 @@ txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 🔹 Sem ID: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
 🔹 Backlog: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
-🔹 Inventário: {f.get('d_n','Nome')} {f.get('inv','🔴')}"""
+🔹 Inventário: {f.get('inv','🔴')}"""
 
 txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ PSs Presentes: {f.get('pss_p', 0)}
