@@ -102,6 +102,7 @@ with tab2:
     resp_row("Backlog Volumoso", "b", "Ney")
     resp_row("Retorno Estação", "r", "Ney / Rauan")
     resp_row("Recebimento", "p", "Oliverrah / Robert")
+    resp_row("Inventário", "p", "Oliverrah / Robert")
     
     c_inv_l, c_inv_s = st.columns([3, 1])
     with c_inv_l: st.write("**Inventário**")
