@@ -136,14 +136,14 @@ Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
 Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 
 txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
-📅 Data: {data_hoje}
+"""📅 Data: {data_hoje}
 🔹 Devolução: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
 🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
 🔹 Retorno: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
 🔹 Sem ID: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
 🔹 Backlog: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
-🔹 Inventário: {f.get('inv','🔴')}"""
+🔹 Inventário: {f.get('i_n','Nome')} {f.get('i_s','🔴')}"""
 
 txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ PSs Presentes: {f.get('pss_p', 0)}
