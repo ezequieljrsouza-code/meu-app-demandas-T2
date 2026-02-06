@@ -95,18 +95,15 @@ with tab2:
         with c_status:
             st.selectbox(f"Status {label}", status_opts, key=f"in_{k}_s", index=status_opts.index(f.get(f"{k}_s", "🟡")), on_change=update, args=(f"{k}_s",), label_visibility="visible")
         st.markdown("---")
-
+    
     resp_row("Devolução XPT", "d", "Luis Felipe")
     resp_row("Sem Identificação", "s", "Dharlyson")
     resp_row("Avarias", "a", "Ney")
     resp_row("Backlog Volumoso", "b", "Ney")
     resp_row("Retorno Estação", "r", "Ney / Rauan")
     resp_row("Recebimento", "p", "Oliverrah / Robert")
+    resp_row("Inventário", "inv", "")
     
-    c_inv_l, c_inv_s = st.columns([3, 1])
-    with c_inv_l: st.write("**Inventário**")
-    with c_inv_s: st.selectbox("Status Inventário", status_opts, key="in_inv", index=status_opts.index(f.get("inv", "🔴")), on_change=update, args=("inv",), label_visibility="collapsed")
-
 # --- ABA 3: PRESENÇA ---
 with tab3:
     st.markdown("### Dados de PSs")
