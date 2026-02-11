@@ -56,10 +56,10 @@ with col_t:
     st.write(f"Analista: **Ezequiel Miranda**")
 with col_s:
     st.write("##")
-    # Botão Sincronizar: Ajustado para ativar a notificação pós-reload
+    # Botão Sincronizar
     if st.button("🔄 Sincronizar", use_container_width=True, type="primary"):
         st.session_state.form_data = carregar()
-        st.session_state['sync_ok'] = True # Ativa o gatilho da notificação
+        st.session_state['sync_ok'] = True
         st.rerun()
 
 # 5. Variáveis Globais
@@ -74,7 +74,6 @@ with tab1:
     def area(label, k):
         st.markdown(f"**{label}**")
         c1, c2 = st.columns(2)
-        # O index busca o valor atual no form_data. Se não achar, usa padrão.
         c1.selectbox("Org. Ruas", status_opts, key=f"in_{k}_o", index=status_opts.index(f.get(f"{k}_o", "🟡")), on_change=update, args=(f"{k}_o",))
         c2.selectbox("Etiq. QRs", status_opts, key=f"in_{k}_q", index=status_opts.index(f.get(f"{k}_q", "🟡")), on_change=update, args=(f"{k}_q",))
     
@@ -91,8 +90,10 @@ with tab2:
     def resp_row(label, k, d_n):
         c_nome, c_status = st.columns([3, 1]) # Layout 75% / 25%
         with c_nome:
+            # Input de Nome
             st.text_input(label, key=f"in_{k}_n", value=f.get(f"{k}_n", d_n), on_change=update, args=(f"{k}_n",))
         with c_status:
+            # Input de Status
             st.selectbox(f"Status {label}", status_opts, key=f"in_{k}_s", index=status_opts.index(f.get(f"{k}_s", "🟡")), on_change=update, args=(f"{k}_s",), label_visibility="visible")
         st.markdown("---")
 
@@ -102,7 +103,9 @@ with tab2:
     resp_row("Backlog Volumoso", "b", "Ney")
     resp_row("Retorno Estação", "r", "Ney / Rauan")
     resp_row("Recebimento", "p", "Oliverrah / Robert")
-    resp_row("Inventário", "p", "Oliverrah / Robert")
+    
+    # --- CORREÇÃO: Inventário agora usa a mesma estrutura (Nome + Status) ---
+    resp_row("Inventário", "inv", "") 
 
 # --- ABA 3: PRESENÇA ---
 with tab3:
@@ -126,7 +129,6 @@ with tab3:
 st.divider()
 st.subheader("🚀 Gerar Relatórios")
 
-# Definição dos textos
 txt_layout = f"""Status Layout 
 🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
 
@@ -136,6 +138,7 @@ Gaiolas SVC: {f.get('gs_o','🟡')} Org. Ruas | {f.get('gs_q','🟡')} QRs
 Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
 Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 
+# Ajuste no texto para pegar Nome e Status do Inventário
 txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 📅 Data: {data_hoje}
 🔹 Devolução: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
@@ -144,7 +147,7 @@ txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 🔹 Sem ID: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
 🔹 Backlog: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
-🔹 Inventário: {f.get('inv','🔴')}"""
+🔹 Inventário: {f.get('inv_n','')} {f.get('inv_s','🔴')}"""
 
 txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ PSs Presentes: {f.get('pss_p', 0)}
@@ -154,12 +157,12 @@ txt_presenca = f"""*RESUMO DE PRESENÇA*
 🫁 Pulmão: {f.get('p6',1)} | 🛌 Folgas: {int(f.get('p7',8))}
 ⚠ Suspensões: {f.get('p8',0)}"""
 
-# Preparação para JS (escape de quebras de linha)
+# Preparação para JS
 js_lay = txt_layout.replace("\n", "\\n").replace("'", "\\'")
 js_ope = txt_operacional.replace("\n", "\\n").replace("'", "\\'")
 js_pre = txt_presenca.replace("\n", "\\n").replace("'", "\\'")
 
-# --- Exibição em Colunas para facilitar o clique ---
+# --- Exibição em Colunas ---
 col_r1, col_r2, col_r3 = st.columns(3)
 
 with col_r1:
