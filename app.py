@@ -103,10 +103,11 @@ with tab2:
     resp_row("Retorno Estação", "r", "Ney / Rauan")
     resp_row("Recebimento", "p", "Oliverrah / Robert")
     
-    # Ajuste: Voltando ao selectbox simples para Inventário para garantir compatibilidade com o report
+    # --- CORREÇÃO: Selectbox de Inventário Recolocada ---
     c_inv_l, c_inv_s = st.columns([3, 1])
     with c_inv_l: st.write("**Inventário**")
-    with c_inv_s: st.selectbox("Status Inventário", status_opts, key="in_inv", index=status_opts.index(f.get("inv", "🔴")), on_change=update, args=("inv",), label_visibility="collapsed")
+    with c_inv_s: 
+        st.selectbox("Status Inventário", status_opts, key="in_inv", index=status_opts.index(f.get("inv", "🔴")), on_change=update, args=("inv",), label_visibility="collapsed")
 
 # --- ABA 3: PRESENÇA ---
 with tab3:
