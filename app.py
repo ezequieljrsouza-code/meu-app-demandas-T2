@@ -6,7 +6,7 @@ from google.oauth2 import service_account
 import json
 
 # 1. Configuração da Página
-st.set_page_config(page_title="Report Operacional SPA1", page_icon="📋", layout="wide")
+st.set_page_config(page_title="Report Operacional SPA1 T2", page_icon="📋", layout="wide")
 
 # --- 1. NOTIFICAÇÃO PÓS-SYNC ---
 if st.session_state.get('sync_ok'):
