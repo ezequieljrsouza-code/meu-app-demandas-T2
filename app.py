@@ -167,7 +167,7 @@ col_r1, col_r2, col_r3 = st.columns(3)
 
 with col_r1:
     st.markdown("### 1. Layout")
-    st.text_area("Texto Layout", txt_layout, height=250)
+    st.text_area("Texto Layout", txt_layout, height=300)
     components.html(f"""
     <script>
     function cp1(){{ navigator.clipboard.writeText(`{js_lay}`).then(() => alert('Copiado Layout! ✅')); }}
@@ -177,7 +177,7 @@ with col_r1:
 
 with col_r2:
     st.markdown("### 2. Operacional")
-    st.text_area("Texto Operacional", txt_operacional, height=250)
+    st.text_area("Texto Operacional", txt_operacional, height=300)
     components.html(f"""
     <script>
     function cp2(){{ navigator.clipboard.writeText(`{js_ope}`).then(() => alert('Copiado Operacional! ✅')); }}
@@ -187,7 +187,7 @@ with col_r2:
 
 with col_r3:
     st.markdown("### 3. Presença")
-    st.text_area("Texto Presença", txt_presenca, height=250)
+    st.text_area("Texto Presença", txt_presenca, height=300)
     components.html(f"""
     <script>
     function cp3(){{ navigator.clipboard.writeText(`{js_pre}`).then(() => alert('Copiado Presença! ✅')); }}
