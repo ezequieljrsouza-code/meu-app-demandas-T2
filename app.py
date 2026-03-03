@@ -141,11 +141,11 @@ Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 # Ajuste no texto para pegar Nome e Status do Inventário
 txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 📅 Data: {data_hoje}
-🔹 Devolução: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
+🔹 Devolução XPT: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
 🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
-🔹 Retorno: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
-🔹 Sem ID: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
-🔹 Backlog: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
+🔹 RTS: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
+🔹 Sem Identificação: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
+🔹 Backlog Pacotinho / Volumoso: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
 🔹 Inventário: {f.get('inv_n','')} {f.get('inv_s','🔴')}"""
 
