@@ -140,6 +140,7 @@ Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 
 # Ajuste no texto para pegar Nome e Status do Inventário
 txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
+🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
 📅 Data: {data_hoje}
 🔹 Devolução XPT: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
 🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
