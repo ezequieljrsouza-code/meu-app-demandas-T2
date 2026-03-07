@@ -129,7 +129,7 @@ with tab3:
 st.divider()
 st.subheader("🚀 Gerar Relatórios")
 
-txt_layout = f"""Status Layout 
+txt_layout = f"""*Status Layout* 
 🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
 
 Gaiolas XPT: {f.get('gx_o','🟡')} Org. Ruas | {f.get('gx_q','🟡')} QRs
@@ -139,7 +139,7 @@ Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
 Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 
 # CORREÇÃO: Variáveis da Etiquetagem ajustadas de 'd_n' e 'd_s' para 'e_n' e 'e_s'
-txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
+txt_operacional = f"""*REPORT OPERACIONAL DE PSs T2 - Demandas*
 🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
 📅 Data: {data_hoje}
 🔹 Devolução XPT: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
