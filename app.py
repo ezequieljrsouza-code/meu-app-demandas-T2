@@ -100,12 +100,11 @@ with tab2:
     resp_row("Devolução XPT", "d", "Luis Felipe")
     resp_row("Sem Identificação", "s", "Dharlyson")
     resp_row("Avarias", "a", "Ney")
-    resp_row("Etiquetagem / Montagem de HU Reversa", "a", "Ney")
+    # CORREÇÃO: Chave alterada de "a" para "e" para evitar duplicação
+    resp_row("Etiquetagem / Montagem de HU Reversa", "e", "Ney")
     resp_row("Backlog Volumoso", "b", "Ney")
     resp_row("Retorno Estação", "r", "Ney / Rauan")
     resp_row("Recebimento", "p", "Oliverrah / Robert")
-    
-    # --- CORREÇÃO: Inventário agora usa a mesma estrutura (Nome + Status) ---
     resp_row("Inventário", "inv", "") 
 
 # --- ABA 3: PRESENÇA ---
@@ -139,12 +138,12 @@ Gaiolas SVC: {f.get('gs_o','🟡')} Org. Ruas | {f.get('gs_q','🟡')} QRs
 Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
 Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 
-# Ajuste no texto para pegar Nome e Status do Inventário
+# CORREÇÃO: Variáveis da Etiquetagem ajustadas de 'd_n' e 'd_s' para 'e_n' e 'e_s'
 txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
 📅 Data: {data_hoje}
 🔹 Devolução XPT: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
-🔹 Etiquetagem / Montagem de HU Reversa: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
+🔹 Etiquetagem / Montagem de HU Reversa: {f.get('e_n','Ney')} {f.get('e_s','🟡')}
 🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
 🔹 RTS: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
 🔹 Sem Identificação: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
