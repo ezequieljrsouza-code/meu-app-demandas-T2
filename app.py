@@ -102,7 +102,7 @@ with tab2:
     resp_row("Avarias", "a", "Ney")
     # CORREÇÃO: Chave alterada de "a" para "e" para evitar duplicação
     resp_row("Etiquetagem / Montagem de HU Reversa", "e", "Ney")
-    resp_row("Backlog Volumoso", "b", "Ney")
+    resp_row("Tratativas Backlog Pacotinho / Volumoso", "b", "Ney")
     resp_row("Retorno Estação", "r", "Ney / Rauan")
     resp_row("Recebimento", "p", "Oliverrah / Robert")
     resp_row("Inventário", "inv", "") 
@@ -147,7 +147,7 @@ txt_operacional = f"""REPORT OPERACIONAL DE PSs T2 - Demandas
 🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
 🔹 RTS: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
 🔹 Sem Identificação: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
-🔹 Backlog Pacotinho / Volumoso: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
+🔹 Tratativas Backlog Pacotinho / Volumoso: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
 🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
 🔹 Inventário: {f.get('inv_n','')} {f.get('inv_s','🔴')}"""
 
