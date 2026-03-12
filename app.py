@@ -104,7 +104,6 @@ with tab2:
     resp_row("Etiquetagem / Montagem de HU Reversa", "e", "Ney")
     resp_row("Tratativas Backlog Pacotinho / Volumoso", "b", "Ney")
     resp_row("Retorno Estação", "r", "Ney / Rauan")
-    resp_row("Recebimento", "p", "Oliverrah / Robert")
     resp_row("Inventário", "inv", "") 
 
 # --- ABA 3: PRESENÇA ---
