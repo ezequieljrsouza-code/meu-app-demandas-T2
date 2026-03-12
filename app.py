@@ -148,7 +148,6 @@ txt_operacional = f"""*REPORT OPERACIONAL DE PSs T2 - Demandas*
 🔹 RTS: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
 🔹 Sem Identificação: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
 🔹 Tratativas Backlog Pacotinho / Volumoso: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
-🔹 Recebimento: {f.get('p_n','Oliverrah')} {f.get('p_s','🟡')}
 🔹 Inventário: {f.get('inv_n','')} {f.get('inv_s','🔴')}"""
 
 txt_presenca = f"""*RESUMO DE PRESENÇA*
