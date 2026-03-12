@@ -94,7 +94,7 @@ with tab2:
             st.text_input(label, key=f"in_{k}_n", value=f.get(f"{k}_n", d_n), on_change=update, args=(f"{k}_n",))
         with c_status:
             # Input de Status
-            st.selectbox(f"Status {label}", status_opts, key=f"in_{k}_s", index=status_opts.index(f.get(f"{k}_s", "🟡")), on_change=update, args=(f"{k}_s",), label_visibility="visible")
+            st.selectbox(f"Status {label}", status_opts, key=f"in_{k}_s", index=status_opts.index(f.get(f"{k}_s", "")), on_change=update, args=(f"{k}_s",), label_visibility="visible")
         st.markdown("---")
 
     resp_row("Devolução XPT", "d", "Luis Felipe")
