@@ -138,16 +138,15 @@ Volumoso SVC: {f.get('vs_o','🟡')} Org. Ruas | {f.get('vs_q','🟡')} QRs
 Goleiro: {f.get('go_o','🟡')} Org. Ruas | {f.get('go_q','🟡')} QRs"""
 
 # CORREÇÃO: Variáveis da Etiquetagem ajustadas de 'd_n' e 'd_s' para 'e_n' e 'e_s'
-txt_operacional = f"""*REPORT OPERACIONAL DE PSs T2 - Demandas*
-🔴 Não iniciado | 🟡 Em andamento | 🟢 Finalizado 
+txt_operacional = f"""*REPORT OPERACIONAL DE PSs T2 - Demandas (6 PSs)*
 📅 Data: {data_hoje}
-🔹 Devolução XPT: {f.get('d_n','Luis Felipe')} {f.get('d_s','🟡')}
-🔹 Etiquetagem / Montagem de HU Reversa: {f.get('e_n','Ney')} {f.get('e_s','🟡')}
-🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','🟡')}
-🔹 RTS: {f.get('r_n','Ney/Rauan')} {f.get('r_s','🟡')}
-🔹 Sem Identificação: {f.get('s_n','Dharlyson')} {f.get('s_s','🟡')}
-🔹 Tratativas Backlog Pacotinho / Volumoso: {f.get('b_n','Ney')} {f.get('b_s','🟢')}
-🔹 Inventário: {f.get('inv_n','')} {f.get('inv_s','🔴')}"""
+🔹 Devolução XPT: {f.get('d_n','Luis Felipe')} {f.get('d_s','')}
+🔹 Etiquetagem / Montagem de HU Reversa: {f.get('e_n','Ney')} {f.get('e_s','')}
+🔹 Avarias: {f.get('a_n','Ney')} {f.get('a_s','')}
+🔹 RTS: {f.get('r_n','Ney/Rauan')} {f.get('r_s','')}
+🔹 Sem Identificação: {f.get('s_n','Dharlyson')} {f.get('s_s','')}
+🔹 Tratativas Backlog Pacotinho / Volumoso: {f.get('b_n','Ney')} {f.get('b_s','')}
+🔹 Inventário: {f.get('inv_n','')} {f.get('inv_s','')}"""
 
 txt_presenca = f"""*RESUMO DE PRESENÇA*
 ✅ PSs Presentes: {f.get('pss_p', 0)}
